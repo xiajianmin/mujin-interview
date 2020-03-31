@@ -1,4 +1,4 @@
-#~/routes/joint.py
+# ~/routes/joint.py
 
 from flask import Response, request
 from flask_restful import Resource
@@ -17,6 +17,6 @@ class JointApi(Resource):
         print("update a joint")
         return '', 202
 
-def initializeRobotRoutes(api):
+def initializeJointRoutes(api):
     api.add_resource(JointsApi, '/api/robot/<robotid>/joint')
     api.add_resource(JointApi, '/api/robot/<robotid>/joint/<jointid>')

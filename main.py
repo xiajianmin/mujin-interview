@@ -1,8 +1,15 @@
 from flask import Flask
-from flask_restful import Resource, Api
+from flask_restful import Api
+
+from routes import *
 
 app = Flask(__name__)
-app.register_blueprint()
+api = Api(app)
+
+initializeRobotRoutes(api)
+initializeLinkRoutes(api)
+initializeJointRoutes(api)
+initializeGeometryRoutes(api)
 
 if __name__ == '__main__':
     app.run(debug=True)
