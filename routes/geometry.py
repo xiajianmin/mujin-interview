@@ -2,10 +2,11 @@
 
 from flask import Response, request
 from flask_restful import Resource
+from app import geometry
 
 class GeometriesApi(Resource):
     def get(self, robotid, linkid):
-        print("get geometries")
+        g = geometry.Geometry
         return Response({}, mimetype="application/json", status=200)
     
     def post(self, robotid, linkid):

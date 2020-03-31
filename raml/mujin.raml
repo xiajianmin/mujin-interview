@@ -1,0 +1,165 @@
+#%RAML 1.0
+title: Mujin API
+baseUri: ./api
+mediaType: application/json
+types:
+  Robot:
+    type: object
+    properties:
+      id: string
+      name: string
+      links: Link[]
+        minItems: 1
+      joints: Joint[]
+  Joint:
+    type: object
+    properties:
+      id: string
+      name: string
+      parentLinkId: string
+        readonly: true
+      childLinkId: string
+        readonly: true
+      anchor: number[]
+        maxItems: 3
+      axis: number[]
+        maxItems: 3
+  Link:
+    type: object
+    properties:
+      id: string
+        required: true
+      parentLinkId: nil | string
+        readonly: true
+      name: string
+      transform: number[]
+        maxItems: 7
+      geometries: Geometry[]
+  Geometry:
+    type: object
+    properties:
+      id: string
+      name: string
+      type: string
+        default: "box"
+      extents: number[]
+        maxItems: 7
+      transform: number[]
+        maxItems: 7
+
+/robot:
+  get:
+    responses: 
+      200:
+        body:
+          application/json:
+            type: Robot
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            type: number
+/robot/{robotid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Robot
+  put:
+    responses:
+      202:
+        body:
+          application/json:
+            type: nil
+  delete:
+    responses:
+      204:
+        body:
+          application/json:
+            type: nil
+/robot/{robotid}/joint:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Joint
+/robot/{robotid}/joint/{jointid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Joint
+  put:
+    responses:
+      202:
+        body:
+          application/json:
+            type: nil
+/robot/{robotid}/link:
+  get:
+    responses: 
+      200:
+        body:
+          application/json:
+            type: Joint
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            type: number
+/robot/{robotid}/link/{linkid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Link
+  put:
+    responses:
+      202:
+        body:
+          application/json:
+            type: nil
+  delete:
+    responses:
+      204:
+        body:
+          application/json:
+            type: nil
+/robot/{robotid}/link/{linkid}/geometry:
+  get:
+    responses: 
+      200:
+        body:
+          application/json:
+            type: Geometry
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            type: number
+/robot/{robotid}/link/{linkid}/geometry/{geometryid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Geometry
+  put:
+    responses:
+      202:
+        body:
+          application/json:
+            type: nil
+  delete:
+    responses:
+      204:
+        body:
+          application/json:
+            type: nil
