@@ -2,28 +2,32 @@
 
 from flask import Response, request
 from flask_restful import Resource
+from handlers import robot
 
 class RobotsApi(Resource):
     def get(self):
-        print("get robots")
-        return Response({}, mimetype="application/json", status=200)
+        robots = robot.getAllRobots()
+        return Response(robots, mimetype="application/json", status=200)
     
     def post(self):
-        print("create robot")
-        return {'id': 10}, 201
+        body = request.get_json()
+        name = body.name
+        res, status = robot.saveRobot(name)
+        return Response(robots, mimetype="application/json", status=201)
 
 class RobotApi(Resource):
     def get(self, robotid):
-        print("get a robot")
+        robot = robot.getRobot(robotid)
         return Response(robot, mimetype="application/json", status=200)
 
     def put(self, robotid):
-        print("update a robot")
-        return '', 202
+        body = request.get_json()
+        robot.updateRobot(robotid, **body)
+        return Response({}, mimetype="application/json", status=202)
     
     def delete(self, robotid):
         print("delete a robot")
-        return '', 204
+        return Response({}, mimetype="application/json", status=204)
 
 def initializeRobotRoutes(api):
     api.add_resource(RobotsApi, '/api/robot')

@@ -2,6 +2,7 @@
 
 from flask import Response, request
 from flask_restful import Resource
+from handlers import joint
 
 class JointsApi(Resource):
     def get(self, robotid):
@@ -15,7 +16,7 @@ class JointApi(Resource):
 
     def put(self, robotid, jointid):
         print("update a joint")
-        return '', 202
+        return Response({}, mimetype="application/json", status=202)
 
 def initializeJointRoutes(api):
     api.add_resource(JointsApi, '/api/robot/<robotid>/joint')

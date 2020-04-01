@@ -2,16 +2,16 @@
 
 from flask import Response, request
 from flask_restful import Resource
-from app import geometry
+from handlers import geometry
 
 class GeometriesApi(Resource):
     def get(self, robotid, linkid):
-        g = geometry.Geometry
+        
         return Response({}, mimetype="application/json", status=200)
     
     def post(self, robotid, linkid):
         print("create geometry")
-        return {'id': 10}, 201
+        return Response({}, mimetype="application/json", status=201)
 
 class GeometryApi(Resource):
     def get(self, robotid, linkid, geometryid):
@@ -20,11 +20,11 @@ class GeometryApi(Resource):
 
     def put(self, robotid, linkid, geometryid):
         print("update a geometry")
-        return '', 202
+        return Response({}, mimetype="application/json", status=202)
     
     def delete(self, robotid, linkid, geometryid):
         print("delete a geometry")
-        return '', 204
+        return Response({}, mimetype="application/json", status=204)
 
 def initializeGeometryRoutes(api):
     api.add_resource(GeometriesApi, '/api/robot/<robotid>/link/<linkid>/geometry')
