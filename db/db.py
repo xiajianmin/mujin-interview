@@ -17,6 +17,5 @@ db_session = scoped_session(sessionmaker(autocommit=False,
 def init_db():
     metadata.create_all(bind=engine)
 
-@app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()

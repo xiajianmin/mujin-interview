@@ -1,9 +1,5 @@
-from sqlalchemy import Table, Column, Integer, Text
-from sqlalchemy.orm import mapper
-from db import metadata, db_session
+class Robot():
 
-class Robot:
-    
     def __init__(self, id="", name="", links=[], joints=[]):
         self.id = id
         self.name = name

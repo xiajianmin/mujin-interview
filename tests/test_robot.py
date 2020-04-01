@@ -3,6 +3,12 @@
 import pytest
 from routes import RobotApi, RobotsApi
 
+from app import db
+
+def mydb():
+    db.drop_all()
+    db.create_all()
+
 def test_create_robot():
     return
 
@@ -14,10 +20,10 @@ def test_get_all_robot():
     assert response.status_code == 201
 
 def test_get_robot():
-    return
+    pass
 
 def test_update_robot():
-    return
+    pass
 
 def test_delete_robot():
-    return
+    pass

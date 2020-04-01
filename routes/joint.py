@@ -2,7 +2,7 @@
 
 from flask import Response, request
 from flask_restful import Resource
-from handlers import joint
+from handlers.joint import *
 
 class JointsApi(Resource):
     def get(self, robotid):
