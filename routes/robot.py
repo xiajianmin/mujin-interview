@@ -11,24 +11,27 @@ class RobotsApi(Resource):
         return Response(json.dumps(robots), mimetype="application/json", status=200)
     
     def post(self):
-        body = request.get_json()
-        # name = body.name
-        res = createRobot('', '', '')
-        return Response(res, mimetype="application/json", status=201)
+        body = {}
+        if request.data:
+            body = request.get_json()
+        res = createRobot(body)
+        return Response(json.dumps(res), mimetype="application/json", status=201)
 
 class RobotApi(Resource):
     def get(self, robotid):
-        robot = getRobot(robotid)
-        return Response(robot, mimetype="application/json", status=200)
+        res = getRobot(robotid)
+        return Response(json.dumps(res), mimetype="application/json", status=200)
 
     def put(self, robotid):
-        body = request.get_json()
-        print(body)
-        return Response({}, mimetype="application/json", status=202)
+        body = {}
+        if request.data:
+            body = request.get_json()
+        res = updateRobot(robotid, body)
+        return Response(json.dumps(res), mimetype="application/json", status=202)
     
     def delete(self, robotid):
-        print("delete a robot")
-        return Response({}, mimetype="application/json", status=204)
+        res = deleteRobot(robotid)
+        return Response(json.dumps(res), mimetype="application/json", status=204)
 
 def initializeRobotRoutes(api):
     api.add_resource(RobotsApi, '/api/robot')

@@ -12,10 +12,10 @@ def getAllRobots():
     ]
     return res
 
-def createRobot(name, links, joints):
+def createRobot(data):
     # generate a random number
     id = 1
-    return id
+    return {}
 
 def getRobot(id):
     res = {
@@ -23,17 +23,20 @@ def getRobot(id):
     }
     return res
 
-def updateRobot(id, name=None, links=None, joints=None):
+def updateRobot(id, body):
     robot = getRobot(id)
+    name = body.get("name", None)
+    links = body.get("links", None)
+    joints = body.get("joints", None)
     if name is not None:
-        robot.update('name', name)
+        print("update name")
     if links is not None:
-        robot.update('links', links)
+        print("update links")
     if joints is not None:
-        links.update('joints', joints)
-    return res
+        print("update joints")
+    return True
 
 def deleteRobot(id):
     # delete the joint
     # delete the link
-    return
+    return True

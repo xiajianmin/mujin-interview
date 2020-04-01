@@ -6,9 +6,6 @@ class Robot():
         self.links = links
         self.joints = joints
 
-    def update(self, name="", links=[], joints=[]):
-        return
-
     def addLink(self, linkid):
         self.links.append(linkid)
         return

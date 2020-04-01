@@ -1,29 +1,42 @@
 # ~/tests/test_robot.py
 
 import pytest
+import requests
 from routes import RobotApi, RobotsApi
 
-from app import db
-
-def mydb():
-    db.drop_all()
-    db.create_all()
-
-def test_create_robot():
-    return
+base_url = "http://localhost:8080/api"
+headers = {'Content-Type': 'application/json' }
 
 def test_get_all_robot():
-    # When
-    response = ''#RobotsApi.post('/api/robot', headers={"Content-Type": "application/json"})
+    url = base_url + "/robot"
+    response = requests.get(url, headers=headers)
 
     # Then
+    assert response.status_code == 200
+
+def test_create_robot():
+    url = base_url + "/robot"
+    response = requests.post(url, data={}, headers=headers)
+
     assert response.status_code == 201
 
 def test_get_robot():
-    pass
+    id = 1
+    url = base_url + "/robot/" + str(id)
+    response = requests.get(url, headers=headers)
+
+    assert response.status_code == 200
 
 def test_update_robot():
-    pass
+    id = 1
+    url = base_url + "/robot/" + str(id)
+    response = requests.put(url, data={},headers=headers)
+
+    assert response.status_code == 202
 
 def test_delete_robot():
-    pass
+    id = 1
+    url = base_url + "/robot/" + str(id)
+    response = requests.delete(url, headers=headers)
+
+    assert response.status_code == 204
